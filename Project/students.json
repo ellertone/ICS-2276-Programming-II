@@ -1,0 +1,32 @@
+[
+    {
+        "username": "stu",
+        "password": "pass",
+        "student_id": "1001",
+        "balance": 362
+    },
+    {
+        "username": "student2",
+        "password": "password2",
+        "student_id": "1002",
+        "balance": 1250
+    },
+    {
+        "username": "student3",
+        "password": "password3",
+        "student_id": "1003",
+        "balance": 1000
+    },
+    {
+        "username": "stud",
+        "password": "pass",
+        "student_id": "1004",
+        "balance": 618
+    },
+    {
+        "username": "new",
+        "password": "stud",
+        "student_id": "1005",
+        "balance": 1000
+    }
+]

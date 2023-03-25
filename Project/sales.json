@@ -1,0 +1,58 @@
+[
+    {
+        "student_id": "1004",
+        "meal_code": "9",
+        "meal_name": "Coffee",
+        "meal_price": 15,
+        "quantity": 2,
+        "total_cost": 30
+    },
+    {
+        "student_id": "1001",
+        "meal_code": "20",
+        "meal_name": "Rice",
+        "meal_price": 23,
+        "quantity": 1,
+        "total_cost": 23
+    },
+    {
+        "student_id": "1004",
+        "meal_code": "20",
+        "meal_name": "Rice",
+        "meal_price": 23,
+        "quantity": 2,
+        "total_cost": 46
+    },
+    {
+        "student_id": "1001",
+        "meal_code": "13",
+        "meal_name": "Chapati",
+        "meal_price": 20,
+        "quantity": 10,
+        "total_cost": 200
+    },
+    {
+        "student_id": "1001",
+        "meal_code": "1",
+        "meal_name": "Tea",
+        "meal_price": 15,
+        "quantity": 2,
+        "total_cost": 30
+    },
+    {
+        "student_id": "1001",
+        "meal_code": "1",
+        "meal_name": "Tea",
+        "meal_price": 15,
+        "quantity": 1,
+        "total_cost": 15
+    },
+    {
+        "student_id": "1001",
+        "meal_code": "1",
+        "meal_name": "Tea",
+        "meal_price": 15,
+        "quantity": 1,
+        "total_cost": 15
+    }
+]

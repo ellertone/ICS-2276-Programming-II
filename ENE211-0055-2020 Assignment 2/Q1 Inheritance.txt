@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+  private:
+    int age;
+    string firstname;
+    string lastname;
+
+  public:
+    Person(int a, string f, string l) {
+        age = a;
+        firstname = f;
+        lastname = l;
+    }
+
+    void getValues() {
+        cout << "Name: " << firstname << " " << lastname << endl;
+        cout << "Age: " << age << endl;
+    }
+
+    void setValues(int a, string f, string l) {
+        age = a;
+        firstname = f;
+        lastname = l;
+    }
+};
+
+class Student : public Person {
+  private:
+    string institution;
+    int year;
+    string reg_number;
+
+  public:
+    Student(int a, string f, string l, string i, int y, string r) : Person(a, f, l) {
+        institution = i;
+        year = y;
+        reg_number = r;
+    }
+
+    void getValues() {
+        Person::getValues();
+        cout << "Institution: " << institution << endl;
+        cout << "Year: " << year << endl;
+        cout << "Registration Number: " << reg_number << endl;
+    }
+
+    void setValues(int a, string f, string l, string i, int y, string r) {
+        Person::setValues(a, f, l);
+        institution = i;
+        year = y;
+        reg_number = r;
+    }
+};
+
+int main() {
+    Student s(20, "Alice", "Smith", "ABC University", 2, "12345");
+    s.getValues();
+    s.setValues(21, "Bob", "Johnson", "DEF University", 3, "67890");
+    s.getValues();
+    return 0;
+}

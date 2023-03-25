@@ -1,0 +1,55 @@
+class Student:
+    def __init__(self, name, age, email):
+        self.name = name
+        self.age = age
+        self.email = email
+
+class ICTStudent(Student):
+    def __init__(self, name, age, email, student_id):
+        super().__init__(name, age, email)
+        self.student_id = student_id
+
+class LawStudent(Student):
+    def __init__(self, name, age, email, student_id):
+        super().__init__(name, age, email)
+        self.student_id = student_id
+
+class BusinessStudent(Student):
+    def __init__(self, name, age, email, student_id):
+        super().__init__(name, age, email)
+        self.student_id = student_id
+
+class Course:
+    def __init__(self, code, name, description):
+        self.code = code
+        self.name = name
+        self.description = description
+
+class ICTCourse(Course):
+    def __init__(self, code, name, description, instructor):
+        super().__init__(code, name, description)
+        self.instructor = instructor
+
+class LawCourse(Course):
+    def __init__(self, code, name, description, instructor):
+        super().__init__(code, name, description)
+        self.instructor = instructor
+
+class BusinessCourse(Course):
+    def __init__(self, code, name, description, instructor):
+        super().__init__(code, name, description)
+        self.instructor = instructor
+
+class BSCITCourse(ICTCourse):
+    def __init__(self, code, name, description, instructor, stage):
+        super().__init__(code, name, description, instructor)
+        self.stage = stage
+
+# create some student and course objects
+ict_student = ICTStudent("Alice", 21, "alice@example.com", "1234")
+law_course = LawCourse("LAW101", "Introduction to Law", "A survey of different areas of law", "Prof. Smith")
+bsc_it_course = BSCITCourse("IT101", "Introduction to Programming", "An introduction to programming concepts and techniques", "Dr. Jones", "Stage 1")
+
+# access attributes of the objects
+print(ict_student.name) # Alice
+print(law_course.description) # A survey of different areas of law
