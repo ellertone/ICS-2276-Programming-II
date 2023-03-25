@@ -1,4 +1,7 @@
-(i).Inheritance is a concept in object-oriented programming that allows the creation of new classes based on existing classes. In the given scenario, we can use inheritance to create a hierarchy of classes that represent different courses and levels of study. This helps in organizing and processing student details more efficiently and avoiding code duplication
+(i).
+Inheritance is a concept in object-oriented programming that allows the creation of new classes based on existing classes. In the given scenario, we can use inheritance to create a hierarchy of classes that represent different courses and levels of study. This helps in organizing and processing student details more efficiently and avoiding code duplication
+
+
 (ii).
 class Person:
     def __init__(self, age, firstname, lastname):
