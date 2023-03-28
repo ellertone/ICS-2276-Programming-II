@@ -72,7 +72,7 @@ class Admin(User):
         username = input("Enter a username for the student: ")
         password = input("Enter a password for the student: ")
         student_id = input("Enter a student ID: ")
-        balance = float(input("Enter a starting balance: "))
+        balance = int(input("Enter a starting balance: "))
         with open('students.json', 'r+') as f:
             students_data = json.load(f)
             students_data.append({'username': username, 'password': password, 'student_id': student_id, 'balance': balance})
@@ -178,7 +178,7 @@ class System:
         else:
             print("User not found.")
 
-print("Hello, welcome to JKUAT Meal Service.")
+print("\n Hello, welcome to JKUAT Meal Service.\n")
 print("Please enter your details to log into the system: ")
 
 sales = Sales()
@@ -247,7 +247,7 @@ if isinstance(user, Student):
 elif isinstance(user, Admin):
     print(f"Welcome {user.username}.\n")
     while True:
-        print("Please select an option:")
+        print("\n Please select an option:")
         print("1. View sales")
         print("2. Add meal")
         print("3. Remove meal")

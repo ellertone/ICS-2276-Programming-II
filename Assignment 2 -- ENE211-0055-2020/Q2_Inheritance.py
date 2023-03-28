@@ -1,0 +1,21 @@
+class Person:
+    def __init__(self, age, firstname, lastname):
+        self.age = age
+        self.firstname = firstname
+        self.lastname = lastname
+
+    def getValues(self):
+        return (self.age, self.firstname, self.lastname)
+
+    def setValues(self, age, firstname, lastname):
+        self.age = age
+        self.firstname = firstname
+        self.lastname = lastname
+
+
+class Student(Person):
+    def __init__(self, age, firstname, lastname, institution, year, reg_no):
+        super().__init__(age, firstname, lastname)
+        self.institution = institution
+        self.year = year
+        self.reg_no = reg_no

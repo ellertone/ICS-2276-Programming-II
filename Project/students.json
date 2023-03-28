@@ -3,7 +3,7 @@
         "username": "stu",
         "password": "pass",
         "student_id": "1001",
-        "balance": 362
+        "balance": 12
     },
     {
         "username": "student2",
@@ -27,6 +27,24 @@
         "username": "new",
         "password": "stud",
         "student_id": "1005",
+        "balance": 1000
+    },
+    {
+        "username": "John",
+        "password": "passwad",
+        "student_id": "1005",
+        "balance": 1000.0
+    },
+    {
+        "username": "JKUAT STUDENT",
+        "password": "PASSWORD",
+        "student_id": "123456",
+        "balance": 1000.0
+    },
+    {
+        "username": "japan",
+        "password": "1234",
+        "student_id": "1234",
         "balance": 1000
     }
 ]

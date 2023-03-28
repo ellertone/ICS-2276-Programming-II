@@ -1,65 +1,43 @@
-#include <iostream>
-#include <string>
+class Person:
+    def __init__(self, age, firstname, lastname):
+        self.age = age
+        self.firstname = firstname
+        self.lastname = lastname
 
-using namespace std;
+    def getValues(self):
+        print("Name:", self.firstname, self.lastname)
+        print("Age:", self.age)
 
-class Person {
-  private:
-    int age;
-    string firstname;
-    string lastname;
+    def setValues(self, age, firstname, lastname):
+        self.age = age
+        self.firstname = firstname
+        self.lastname = lastname
 
-  public:
-    Person(int a, string f, string l) {
-        age = a;
-        firstname = f;
-        lastname = l;
-    }
 
-    void getValues() {
-        cout << "Name: " << firstname << " " << lastname << endl;
-        cout << "Age: " << age << endl;
-    }
+class Student(Person):
+    def __init__(self, age, firstname, lastname, institution, year, reg_number):
+        super().__init__(age, firstname, lastname)
+        self.institution = institution
+        self.year = year
+        self.reg_number = reg_number
 
-    void setValues(int a, string f, string l) {
-        age = a;
-        firstname = f;
-        lastname = l;
-    }
-};
+    def getValues(self):
+        super().getValues()
+        print("Institution:", self.institution)
+        print("Year:", self.year)
+        print("Registration Number:", self.reg_number)
 
-class Student : public Person {
-  private:
-    string institution;
-    int year;
-    string reg_number;
+    def setValues(self, age, firstname, lastname, institution, year, reg_number):
+        super().setValues(age, firstname, lastname)
+        self.institution = institution
+        self.year = year
+        self.reg_number = reg_number
 
-  public:
-    Student(int a, string f, string l, string i, int y, string r) : Person(a, f, l) {
-        institution = i;
-        year = y;
-        reg_number = r;
-    }
 
-    void getValues() {
-        Person::getValues();
-        cout << "Institution: " << institution << endl;
-        cout << "Year: " << year << endl;
-        cout << "Registration Number: " << reg_number << endl;
-    }
+s = Student(20, "Alice", "Smith", "ABC University", 2, "12345")
+s.getValues()
+s.setValues(21, "Bob", "Johnson", "DEF University", 3, "67890")
+s.getValues()
 
-    void setValues(int a, string f, string l, string i, int y, string r) {
-        Person::setValues(a, f, l);
-        institution = i;
-        year = y;
-        reg_number = r;
-    }
-};
 
-int main() {
-    Student s(20, "Alice", "Smith", "ABC University", 2, "12345");
-    s.getValues();
-    s.setValues(21, "Bob", "Johnson", "DEF University", 3, "67890");
-    s.getValues();
-    return 0;
-}
+
