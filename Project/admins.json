@@ -1,12 +1,17 @@
 [
     {
-        "username": "ad",
-        "password": "pas",
+        "username": "Administartor",
+        "password": "Password",
         "admin_id": "A1001"
     },
     {
         "username": "admin2",
         "password": "password2",
         "admin_id": "A1002"
+    },
+    {
+        "username": "Ellertone",
+        "password": "Password",
+        "admin_id": "A1003"
     }
 ]

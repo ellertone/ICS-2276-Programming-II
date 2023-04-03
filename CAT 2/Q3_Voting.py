@@ -1,3 +1,4 @@
+# define a class for Voter with attributes and methods
 class Voter:
     def __init__(self, voter_card_id, national_id, first_name, middle_name, last_name, polling_station, date_of_birth, gender):
         self.voter_card_id = voter_card_id
@@ -10,6 +11,7 @@ class Voter:
         self.gender = gender
     
     def display_voter_details(self):
+        # display the details of a voter
         print("Voter Card ID: ", self.voter_card_id)
         print("National ID: ", self.national_id)
         print("First Name: ", self.first_name)
@@ -18,10 +20,15 @@ class Voter:
         print("Polling Station: ", self.polling_station)
         print("Date of Birth: ", self.date_of_birth)
         print("Gender: ", self.gender)
-        
+
+# create an empty list to store the voters
 voter_list = []
+test = Voter("0001", "1000", "Uhuru", "Mwigai", "Kenyatta", "Gatundu", "12-12-1963", "Male")
+voter_list.append(test)
+
 # Interactive driver program
 while True:
+    # display menu
     print("\nWelcome to The Interim Independent Electoral Commission (IIEC)")
     print("Electronic Voting Management System (EVMS)")
     print("\nSelect an option:")
@@ -30,6 +37,7 @@ while True:
     print("3. Exit")
     choice = input("Enter your choice: ")
     
+    # add new voter details
     if choice == '1':
         print("\nEnter the following voter details:")
         voter_card_id = input("Voter Card ID: ")
@@ -40,14 +48,17 @@ while True:
         polling_station = input("Polling Station: ")
         import re
         date_of_birth = input("Date of Birth (dd-mm-yyyy): ")
+        # check for valid date format
         while not re.match(r'\d{2}-\d{2}-\d{4}', date_of_birth):
             date_of_birth = input("Invalid format. Please enter your Date of Birth in the format dd-mm-yyyy: ")
         gender = input("Gender: ")
         
+        # create a new Voter object and append to the list
         voter = Voter(voter_card_id, national_id, first_name, middle_name, last_name, polling_station, date_of_birth, gender)
         voter_list.append(voter)
         print("\nVoter details added successfully.")
     
+    # display voter details
     elif choice == '2':
         if voter_list: # check if list is not empty
             # display voter details of all voters in list
@@ -58,10 +69,12 @@ while True:
         else:
             print("\nNo voter details found. Please add voter details first.")
             
+    # exit the program
     elif choice == '3':
         print("\nExiting the program...")
         break
     
+    # invalid choice
     else:
         print("\nInvalid choice. Please select a valid option.")
 
