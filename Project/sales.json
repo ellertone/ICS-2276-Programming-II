@@ -110,5 +110,21 @@
         "meal_price": 3,
         "quantity": 2,
         "total_cost": 6
+    },
+    {
+        "student_id": "1002",
+        "meal_code": "16",
+        "meal_name": "Beef",
+        "meal_price": 120,
+        "quantity": 2,
+        "total_cost": 240
+    },
+    {
+        "student_id": "1002",
+        "meal_code": "20",
+        "meal_name": "Rice",
+        "meal_price": 23,
+        "quantity": 5,
+        "total_cost": 115
     }
 ]

@@ -166,37 +166,32 @@ class System:
         return students
 
     def login(self):
-        # Prompt user to enter their username and password
-        print("\nWELCOME TO THE  JKUAT MEAL SERVICE.\n")
+        print("\nWELCOME TO THE JKUAT MEAL SERVICE.\n")
         print("Please enter your details to log in.")
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
+    
+        for attempt in range(3):
+            username = input("Enter your username: ")
+            password = input("Enter your password: ")
 
-        #Check whether the user is an admin or a student based on credentials
-        if username in self.admins:
-            # Check if the user is an admin and if their password is correct
-            if self.admins[username].password == password:
-                print("\nLogin successful as admin.")
-                return self.admins[username]
-            else:
-                print("Incorrect password.")
-                
-        elif username in self.students:
-            # Check if the user is a student and if their password is correct
-            if self.students[username].password == password:
-                print("\nLogin successful as student.")
-                return self.students[username]
-            else:
-                print("Incorrect password.")
-        
-        # If the username and password are invalid, increment the login attempts and try again
-        if self.login_attempts >= 2:
-            print("Maximum number of login attempts reached. \nExiting system.")
-            exit()
-        else:
-            print("Invalid username or password. Please try again.")
-            self.login_attempts += 1
-            return self.login()
+            if username in self.admins:
+                if self.admins[username].password == password:
+                    print("\nLogin successful as admin.")
+                    return self.admins[username]
+                else:
+                    print("Incorrect password.")
+
+            elif username in self.students:
+                if self.students[username].password == password:
+                    print("\nLogin successful as student.")
+                    return self.students[username]
+                else:
+                    print("Incorrect password.")
+
+            print(f"Invalid username or password. Attempts remaining: {2-attempt}")
+
+        print("Maximum number of login attempts reached.")
+        exit()
+
 
 MEAL_OPTIONS = {
     "1": ("Tea", 15),
@@ -303,8 +298,7 @@ if isinstance(user, Student):
                 print("Invalid option, please try again.")
 
    # If the logged in user is an admin
-else:
-    isinstance(user, Admin)
+elif isinstance(user, Admin):
         # Print a welcome message for the admin
     print(f"Welcome {user.username}.\n")
         
@@ -362,3 +356,6 @@ else:
             # If an invalid option is selected
             else:
                 print("Invalid option, please try again")
+else: 
+    print("User not found, exiting system")
+    exit()
