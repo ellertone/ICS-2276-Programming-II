@@ -1,4 +1,7 @@
 # define a class for Voter with attributes and methods
+import uuid
+import re
+
 class Voter:
     def __init__(self, voter_card_id, national_id, first_name, middle_name, last_name, polling_station, date_of_birth, gender):
         self.voter_card_id = voter_card_id
@@ -23,7 +26,7 @@ class Voter:
 
 # create an empty list to store the voters
 voter_list = []
-test = Voter("0001", "1000", "Uhuru", "Mwigai", "Kenyatta", "Gatundu", "12-12-1963", "Male")
+test = Voter("00001", "1000", "Uhuru", "Mwigai", "Kenyatta", "Gatundu", "12-12-1963", "Male")
 voter_list.append(test)
 
 # Interactive driver program
@@ -34,19 +37,20 @@ while True:
     print("\nSelect an option:")
     print("1. Add new voter details")
     print("2. Display voter details")
-    print("3. Exit")
+    print("3. Delete voter details")
+    print("4. Exit")
     choice = input("Enter your choice: ")
     
+
     # add new voter details
     if choice == '1':
         print("\nEnter the following voter details:")
-        voter_card_id = input("Voter Card ID: ")
+        voter_card_id = str(uuid.uuid4())[:5]
         national_id = input("National ID: ")
         first_name = input("First Name: ")
         middle_name = input("Middle Name: ")
         last_name = input("Last Name: ")
         polling_station = input("Polling Station: ")
-        import re
         date_of_birth = input("Date of Birth (dd-mm-yyyy): ")
         # check for valid date format
         while not re.match(r'\d{2}-\d{2}-\d{4}', date_of_birth):
@@ -68,9 +72,23 @@ while True:
                 voter.display_voter_details()
         else:
             print("\nNo voter details found. Please add voter details first.")
+   
+   #delete voter details
+    elif choice == '3':
+        if voter_list: # check if list is not empty
+            voter_card_id = input("\nEnter the Voter Card ID of the voter whose details you want to delete: ")
+            for voter in voter_list:
+                if voter.voter_card_id == voter_card_id:
+                    voter_list.remove(voter)
+                    print("\nVoter details deleted successfully.")
+                    break
+            else:
+                print("\nVoter with Voter Card ID '{}' not found.".format(voter_card_id))
+        else:
+            print("\nNo voter details found. Please add voter details first.")
             
     # exit the program
-    elif choice == '3':
+    elif choice == '4':
         print("\nExiting the program...")
         break
     
