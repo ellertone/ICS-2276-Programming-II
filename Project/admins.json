@@ -1,7 +1,12 @@
 [
+     {
+        "username": "admin",
+        "password": "1234",
+        "admin_id": "A1001"
+    },
     {
-        "username": "Administartor",
-        "password": "Password",
+        "username": "admin1",
+        "password": "Password1",
         "admin_id": "A1001"
     },
     {
@@ -10,7 +15,7 @@
         "admin_id": "A1002"
     },
     {
-        "username": "Ellertone",
+        "username": "Ellerton",
         "password": "Password",
         "admin_id": "A1003"
     }

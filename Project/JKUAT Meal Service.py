@@ -25,7 +25,7 @@ class Student(User):
         self.student_id = student_id
         self.meal_tickets = []
         self.balance = balance
-        self.sales = sales
+        self.sales = Sales()
 
     def place_order(self, meal_code, quantity):
         # Allow the student to place an order by creating a MealTicket object, adding it to the student's list of meal tickets,
@@ -136,7 +136,8 @@ class System:
         self.students = self.load_students_from_file()
         self.admins = self.load_admins_from_file()
         self.sales = Sales()
-
+        self.login_attempts = 0
+        
     def load_admins_from_file(self):
         # Load data from admins file
         with open('admins.json', 'r') as f:
@@ -166,27 +167,36 @@ class System:
 
     def login(self):
         # Prompt user to enter their username and password
+        print("\nWELCOME TO THE  JKUAT MEAL SERVICE.\n")
+        print("Please enter your details to log in.")
         username = input("Enter your username: ")
         password = input("Enter your password: ")
 
-        if username in self.students:
-            # Check if the user is a student and if their password is correct
-            if self.students[username].password == password:
-                print("\nLogin successful as student.")
-                return self.students[username]
-            else:
-                print("Incorrect password.")
-        elif username in self.admins:
+        #Check whether the user is an admin or a student based on credentials
+        if username in self.admins:
             # Check if the user is an admin and if their password is correct
             if self.admins[username].password == password:
                 print("\nLogin successful as admin.")
                 return self.admins[username]
             else:
                 print("Incorrect password.")
+                
+        elif username in self.students:
+            # Check if the user is a student and if their password is correct
+            if self.students[username].password == password:
+                print("\nLogin successful as student.")
+                return self.students[username]
+            else:
+                print("Incorrect password.")
+        
+        # If the username and password are invalid, increment the login attempts and try again
+        if self.login_attempts >= 2:
+            print("Maximum number of login attempts reached. \nExiting system.")
+            exit()
         else:
-            # If the user is not found in students or admins dictionary, then print error message
-            print("User not found.")
-
+            print("Invalid username or password. Please try again.")
+            self.login_attempts += 1
+            return self.login()
 
 MEAL_OPTIONS = {
     "1": ("Tea", 15),
@@ -207,59 +217,74 @@ MEAL_OPTIONS = {
 }
 
 
-print("\n Hello, welcome to JKUAT Meal Service.\n")
-print("Please enter your details to log into the system: ")
 
+ # Call the login method of the system object to authenticate the user
 sales = Sales()
 system = System()
+user = system.login()
 
-# Allow the user to attempt logging in three times before exiting
-for i in range(3):
 
-    user = system.login()
-    if isinstance(user, Student):
+# Check if the user is a student
+if isinstance(user, Student):
+        # Display welcome message and current balance
         print(f"Welcome {user.username}. Your balance is {user.balance}.\n")
+        # Loop until the user logs out
         while True:
+            # Display options for the student
             print("Please select an option:")
             print("1. Place order")
             print("2. Cancel order")
             print("3. View order history")
             print("4. Logout")
-
+            # Get user input for selected option
             option = input("\nEnter option number: ")
+            # If option 1 is selected
             if option == "1":
+                # Display available meals and their codes and prices
                 print("\nHere are the available meals:\n")
                 print("Code  |  Name  |  Price")
                 for code, (name, price) in MEAL_OPTIONS.items():
                     print(f"{code}  |  {name}  |  {price}")
+                # Get user input for meal code and quantity
                 meal_code = input("\nEnter meal code: ")
                 quantity = int(input("Enter quantity: "))
                 meal_price = MEAL_OPTIONS[meal_code][1]
                 total_cost = meal_price * quantity
+                # Check if user has enough balance to place the order
                 if user.balance >= total_cost:
+                    # Place the order and display message with updated balance
                     user.place_order(meal_code, quantity)
                     print("Order placed successfully!Your balance is", user.balance)
                 else:
+                    # Display message if user has insufficient balance
                     print("Sorry, you do not have enough balance to place this order.Your balance is",user.balance)
-
+            # If option 2 is selected
             elif option == "2":
+                # Display current orders of the user
                 print("Here are your current orders:\n")
                 print("Code  |  Name  |  Price | Quantity | Total Cost")
                 for meal_ticket in user.meal_tickets:
                     print(f"{meal_ticket.meal_code} | {meal_ticket.meal_name} | {meal_ticket.meal_price} | {meal_ticket.quantity} | {meal_ticket.total_cost}")
+                # Get user input for the ticket code of the order to be cancelled
                 ticket_code = input("\nEnter ticket code to cancel: ")
+                # Loop through the user's meal tickets to find the order with the ticket code
                 for meal_ticket in user.meal_tickets:
                     if meal_ticket.meal_code == ticket_code:
+                        # Cancel the order and display success message
                         user.cancel_order(meal_ticket)
                         print("\nOrder cancelled successfully!\n")
                         break
                 else:
+                    # Display message if invalid ticket code is entered
                     print("Invalid ticket code, please try again")
+            # If option 3 is selected
             elif option == "3":
+                # Display order history of the user
                 print("Here are your order history:")
                 print("Code  |  Name  |  Price | Quantity | Total Cost")
                 for meal_ticket in user.meal_tickets:
                     print(f"{meal_ticket.meal_code} | {meal_ticket.meal_name} | {meal_ticket.meal_price} | {meal_ticket.quantity} | {meal_ticket.total_cost}")
+
             elif option == "4":
                 # Update student's balance in students.json before logging out
                 with open('students.json', 'r') as f:
@@ -276,9 +301,16 @@ for i in range(3):
                 break
             else:
                 print("Invalid option, please try again.")
-    elif isinstance(user, Admin):
-        print(f"Welcome {user.username}.\n")
-        while True:
+
+   # If the logged in user is an admin
+else:
+    isinstance(user, Admin)
+        # Print a welcome message for the admin
+    print(f"Welcome {user.username}.\n")
+        
+        # Keep looping until the admin logs out
+    while True:
+            # Display the available options for the admin
             print("\n Please select an option:")
             print("1. View sales")
             print("2. Add meal")
@@ -287,29 +319,46 @@ for i in range(3):
             print("5. View student accounts")
             print("6. Logout \n")
 
+            # Get the admin's option choice
             option = input("Enter option number: ")
+            
+            # If option 1 is selected
             if option == "1":
+                # View the total sales made by the system
                 sales = user.view_sales()
 
+            # If option 2 is selected
             elif option == "2":
+                # Add a new meal to the available options
                 meal_code = input("Enter meal code: ")
                 meal_name = input("Enter meal name: ")
                 meal_price = int(input("Enter meal price: "))
                 user.add_meal(meal_code, meal_name, meal_price)
                 print("Meal added successfully!")
+                
+            # If option 3 is selected
             elif option == "3":
+                # Remove a meal from the available options
                 meal_code = input("Enter meal code to remove: ")
                 user.remove_meal(meal_code)
                 print("Meal removed successfully!")
+                
+            # If option 4 is selected
             elif option == "4":
+                # Create a new student account
                 user.create_student_account()
+                
+            # If option 5 is selected
             elif option == "5":
+                # Display all existing student accounts
                 user.view_student_accounts()
+                
+            # If option 6 is selected
             elif option == "6":
+                # Print a logout message for the admin
                 print("Thank you for using JKUAT Meal Service!")
                 break
+                
+            # If an invalid option is selected
             else:
                 print("Invalid option, please try again")
-    else:
-        print("Exiting system...")
-    input()
